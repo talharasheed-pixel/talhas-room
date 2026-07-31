@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Talha's Room - AuraScalper AI Control Center</title>
-  <meta name="description" content="Talha's Room - Live MT5 Gold Trading Dashboard with AuraScalper AI">
-  <meta name="theme-color" content="#070a12">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,80 +33,70 @@
         radial-gradient(at 90% 90%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
         radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
       color: var(--text-main);
-      padding: 20px;
+      padding: 28px;
       min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* ============================================ */
-    /* HEADER                                       */
-    /* ============================================ */
+    /* Top Brand Header */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
       border-bottom: 1px solid var(--card-border);
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
     .brand-box {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
     .brand-icon {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       border-radius: 14px;
       background: linear-gradient(135deg, #f59e0b, #d97706);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 26px;
       box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
-      flex-shrink: 0;
     }
 
     .header h1 {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 800;
       letter-spacing: -0.5px;
       background: linear-gradient(135deg, #fbbf24, #f59e0b, #38bdf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
     .header p {
       color: var(--text-muted);
-      font-size: 12px;
+      font-size: 14px;
       margin-top: 2px;
     }
 
     .controls-group {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 14px;
     }
 
-    /* Pills */
     .role-pill {
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 30px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       background: rgba(245, 158, 11, 0.15);
       color: var(--accent-gold);
       border: 1px solid rgba(245, 158, 11, 0.3);
       display: flex;
       align-items: center;
-      gap: 5px;
-      white-space: nowrap;
+      gap: 6px;
     }
 
     .role-pill.viewer {
@@ -118,35 +106,26 @@
     }
 
     .status-pill {
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 30px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       background: rgba(16, 185, 129, 0.12);
       color: var(--accent-green);
       border: 1px solid rgba(16, 185, 129, 0.3);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
-      white-space: nowrap;
-    }
-
-    .status-pill.offline {
-      background: rgba(244, 63, 94, 0.12);
-      color: var(--accent-red);
-      border-color: rgba(244, 63, 94, 0.3);
-      box-shadow: 0 0 15px rgba(244, 63, 94, 0.15);
     }
 
     .pulse-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background-color: var(--accent-green);
       box-shadow: 0 0 12px var(--accent-green);
       animation: pulse 1.8s infinite;
-      flex-shrink: 0;
     }
 
     @keyframes pulse {
@@ -155,53 +134,47 @@
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
 
-    /* ============================================ */
-    /* ADMIN REQUEST BANNER                         */
-    /* ============================================ */
+    /* Pending Requests Banner for Admin */
     .admin-requests-bar {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.1));
       border: 1px solid rgba(245, 158, 11, 0.5);
       border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 20px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
       display: none;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
       box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
     }
 
     .req-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    /* ============================================ */
-    /* METRIC CARDS                                 */
-    /* ============================================ */
+    /* Metric Cards Grid */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 20px;
+      gap: 20px;
+      margin-bottom: 28px;
     }
 
     .metric-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 18px;
+      border-radius: 16px;
+      padding: 22px;
       position: relative;
       overflow: hidden;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .metric-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: rgba(245, 158, 11, 0.4);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .metric-card::before {
@@ -219,11 +192,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .metric-label {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -231,87 +204,77 @@
     }
 
     .metric-value {
-      font-size: 26px;
+      font-size: 30px;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
 
     .metric-sub {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    /* ============================================ */
-    /* CONTENT GRID                                 */
-    /* ============================================ */
+    /* Content Layout */
     .content-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 20px;
-      margin-bottom: 24px;
+      gap: 24px;
+      margin-bottom: 28px;
     }
 
     .panel {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 24px;
     }
 
     .panel-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-      gap: 8px;
+      margin-bottom: 20px;
     }
 
     .panel-title {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 700;
     }
 
-    /* ============================================ */
-    /* TABLE                                        */
-    /* ============================================ */
+    /* Table Styling for Active Trades */
     .trades-table-container {
       overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 650px;
     }
 
     th {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding: 12px 10px;
+      letter-spacing: 0.8px;
+      padding: 14px 12px;
       text-align: left;
       border-bottom: 1px solid var(--card-border);
       background: var(--glass-bg);
-      white-space: nowrap;
     }
 
     td {
-      padding: 14px 10px;
+      padding: 16px 12px;
       border-bottom: 1px solid rgba(30, 41, 59, 0.5);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
-      white-space: nowrap;
     }
 
     .badge-buy {
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       background: rgba(16, 185, 129, 0.15);
       color: var(--accent-green);
@@ -319,9 +282,9 @@
     }
 
     .badge-sell {
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       background: rgba(244, 63, 94, 0.15);
       color: var(--accent-red);
@@ -329,9 +292,9 @@
     }
 
     .status-prof {
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       background: rgba(16, 185, 129, 0.15);
       color: var(--accent-green);
@@ -339,9 +302,9 @@
     }
 
     .status-hold {
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       background: rgba(245, 158, 11, 0.15);
       color: var(--accent-gold);
@@ -349,25 +312,35 @@
     }
 
     .btn {
-      padding: 7px 14px;
+      padding: 8px 16px;
       border-radius: 10px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       border: none;
       transition: all 0.2s;
-      white-space: nowrap;
     }
 
-    .btn-allow { background: #10b981; color: white; }
-    .btn-deny { background: #f43f5e; color: white; }
+    .btn-allow {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-deny {
+      background: #f43f5e;
+      color: white;
+    }
 
     .btn-danger {
       background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(225, 29, 72, 0.4));
       color: #fecdd3;
       border: 1px solid rgba(244, 63, 94, 0.5);
     }
-    .btn-danger:hover { background: #f43f5e; color: white; }
+
+    .btn-danger:hover {
+      background: #f43f5e;
+      color: white;
+    }
 
     .btn-secondary {
       background: var(--glass-bg);
@@ -376,14 +349,12 @@
     }
 
     .empty-state {
-      padding: 30px;
+      padding: 40px;
       text-align: center;
       color: var(--text-muted);
     }
 
-    /* ============================================ */
-    /* LOCK MODAL                                   */
-    /* ============================================ */
+    /* Modal overlay for visitor waiting approval */
     .lock-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -393,41 +364,42 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
     }
 
     .lock-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 24px;
-      padding: 36px;
+      padding: 40px;
       text-align: center;
-      max-width: 400px;
-      width: 100%;
+      max-width: 440px;
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
     }
 
-    .lock-icon { font-size: 48px; margin-bottom: 14px; }
+    .lock-icon {
+      font-size: 54px;
+      margin-bottom: 16px;
+    }
 
     .spinner {
-      width: 32px;
-      height: 32px;
-      border: 3px solid rgba(6, 182, 212, 0.2);
+      width: 36px;
+      height: 36px;
+      border: 4px solid rgba(6, 182, 212, 0.2);
       border-top-color: #06b6d4;
       border-radius: 50%;
       animation: spin 1s infinite linear;
-      margin: 16px auto 0;
+      margin: 20px auto 0;
     }
 
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    /* Progress Bar */
+    /* Target Progress Bar */
     .progress-bar-container {
       background: rgba(15, 23, 42, 0.9);
       border-radius: 10px;
-      height: 12px;
+      height: 14px;
       overflow: hidden;
-      margin-top: 8px;
+      margin-top: 10px;
       border: 1px solid var(--card-border);
     }
 
@@ -438,157 +410,6 @@
       border-radius: 10px;
       transition: width 0.5s ease;
     }
-
-    /* Connection status bar */
-    .connection-bar {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 8px 14px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .connection-bar .last-update {
-      color: var(--accent-cyan);
-      font-weight: 600;
-    }
-
-    /* ============================================ */
-    /* MOBILE RESPONSIVE                            */
-    /* ============================================ */
-    @media (max-width: 1100px) {
-      .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 12px;
-      }
-
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding-bottom: 12px;
-      }
-
-      .header h1 {
-        font-size: 20px;
-      }
-
-      .header p {
-        font-size: 11px;
-      }
-
-      .brand-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-      }
-
-      .controls-group {
-        width: 100%;
-        justify-content: flex-start;
-        gap: 6px;
-      }
-
-      .metrics-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .metric-card {
-        padding: 14px;
-      }
-
-      .metric-value {
-        font-size: 20px;
-      }
-
-      .metric-label {
-        font-size: 10px;
-      }
-
-      .metric-sub {
-        font-size: 10px;
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-
-      .panel {
-        padding: 14px;
-      }
-
-      .panel-title {
-        font-size: 13px;
-      }
-
-      table {
-        min-width: 580px;
-      }
-
-      th, td {
-        padding: 10px 6px;
-        font-size: 11px;
-      }
-
-      .btn {
-        padding: 6px 10px;
-        font-size: 11px;
-      }
-
-      .admin-requests-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 12px;
-      }
-
-      .lock-card {
-        padding: 28px 20px;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .metrics-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .metric-card {
-        padding: 12px;
-      }
-
-      .metric-value {
-        font-size: 22px;
-      }
-
-      .header h1 {
-        font-size: 18px;
-      }
-
-      .controls-group {
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-
-      .role-pill, .status-pill {
-        font-size: 10px;
-        padding: 4px 8px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -597,12 +418,12 @@
   <div class="lock-overlay" id="guest-lock-modal" style="display: none;">
     <div class="lock-card">
       <div class="lock-icon">🔒</div>
-      <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Talha's Room</h2>
-      <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">
+      <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 8px;">Talha's Room</h2>
+      <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">
         Access Request Submitted to Admin (Talha).<br>
         Please wait for Talha to approve your view request...
       </p>
-      <div style="margin-top: 14px; font-size: 12px; color: var(--accent-cyan);" class="mono" id="req-id-display">#REQ-WAITING</div>
+      <div style="margin-top: 16px; font-size: 13px; color: var(--accent-cyan);" class="mono" id="req-id-display">#REQ-WAITING</div>
       <div class="spinner"></div>
     </div>
   </div>
@@ -621,30 +442,24 @@
         <span>👑 Admin (Talha)</span>
       </div>
       <button class="btn btn-secondary" onclick="fetchStatus()">🔄 Refresh</button>
-      <button class="btn btn-danger" id="admin-close-btn" onclick="confirmEmergencyClose()">🚨 CLOSE ALL</button>
-      <div class="status-pill" id="sys-status-pill">
-        <div class="pulse-dot" id="pulse-dot"></div>
-        <span id="sys-status">CONNECTING...</span>
+      <button class="btn btn-danger" id="admin-close-btn" onclick="confirmEmergencyClose()">🚨 EMERGENCY CLOSE ALL</button>
+      <div class="status-pill">
+        <div class="pulse-dot"></div>
+        <span id="sys-status">SYSTEM ONLINE</span>
       </div>
     </div>
-  </div>
-
-  <!-- Connection Status Bar -->
-  <div class="connection-bar">
-    <span>⚡ Live Data Stream</span>
-    <span>Last Update: <span class="last-update" id="last-update-time">--:--:--</span></span>
   </div>
 
   <!-- Admin Pending Approval Requests Notification Banner -->
   <div class="admin-requests-bar" id="admin-requests-banner">
     <div class="req-item">
-      <span style="font-size: 18px;">🔔</span>
+      <span style="font-size: 20px;">🔔</span>
       <div>
-        <div style="font-weight: 700; color: #fbbf24; font-size: 13px;" id="req-banner-text">Visitor Requesting Dashboard View Access</div>
-        <div style="font-size: 11px; color: var(--text-muted);" id="req-banner-sub">Allow chrome tab to view read-only dashboard?</div>
+        <div style="font-weight: 700; color: #fbbf24; font-size: 14px;" id="req-banner-text">Visitor Requesting Dashboard View Access</div>
+        <div style="font-size: 12px; color: var(--text-muted);" id="req-banner-sub">Allow chrome tab to view read-only dashboard?</div>
       </div>
     </div>
-    <div style="display: flex; gap: 8px;" id="req-banner-actions">
+    <div style="display: flex; gap: 10px;" id="req-banner-actions">
       <!-- Dynamic action buttons -->
     </div>
   </div>
@@ -656,7 +471,7 @@
         <span class="metric-label">Account Balance</span>
         <span>💰</span>
       </div>
-      <div class="metric-value mono" id="val-balance">$0.00</div>
+      <div class="metric-value mono" id="val-balance">$10,000.00</div>
       <div class="metric-sub">Base Capital</div>
     </div>
 
@@ -665,13 +480,13 @@
         <span class="metric-label">Account Equity</span>
         <span>⚡</span>
       </div>
-      <div class="metric-value mono" id="val-equity">$0.00</div>
+      <div class="metric-value mono" id="val-equity">$10,000.00</div>
       <div class="metric-sub" id="val-equity-diff">Net Equity Sync</div>
     </div>
 
     <div class="metric-card green">
       <div class="metric-header">
-        <span class="metric-label">Floating PnL</span>
+        <span class="metric-label">Floating Basket PnL</span>
         <span>📈</span>
       </div>
       <div class="metric-value mono" id="val-pnl" style="color: var(--accent-green);">$0.00</div>
@@ -680,7 +495,7 @@
 
     <div class="metric-card purple">
       <div class="metric-header">
-        <span class="metric-label">Win Rate & Session</span>
+        <span class="metric-label">Win Rate & Session Profit</span>
         <span>🎯</span>
       </div>
       <div class="metric-value mono" id="val-winrate">100%</div>
@@ -695,9 +510,9 @@
     <div class="panel">
       <div class="panel-header">
         <div class="panel-title">
-          <span>📊 Live Active Trades</span>
+          <span>📊 Live Active Trades (Profit / Loss Monitor)</span>
         </div>
-        <div style="font-size: 12px; color: var(--text-muted);" id="pos-count-label">0 Active Positions</div>
+        <div style="font-size: 13px; color: var(--text-muted);" id="pos-count-label">0 Active Positions</div>
       </div>
 
       <div class="trades-table-container">
@@ -709,37 +524,37 @@
               <th>Side</th>
               <th>Lots</th>
               <th>Open Price</th>
-              <th>Current</th>
+              <th>Current Price</th>
               <th>Pips</th>
-              <th>PnL ($)</th>
-              <th>Status</th>
+              <th>Floating PnL ($)</th>
+              <th>Trade Status</th>
             </tr>
           </thead>
           <tbody id="trades-tbody"></tbody>
         </table>
         <div class="empty-state" id="empty-positions">
-          <div style="font-size: 32px; margin-bottom: 8px;">🛡️</div>
+          <div style="font-size: 36px; margin-bottom: 8px;">🛡️</div>
           <div>No Active Open Trades Right Now</div>
-          <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">AuraScalper AI is scanning M1 candles for pullback entries.</div>
+          <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">AuraScalper AI is scanning M1 candles for pullback entries.</div>
         </div>
       </div>
     </div>
 
     <!-- Live Telemetry Radar & Chart -->
     <div>
-      <div class="panel" style="margin-bottom: 16px;">
+      <div class="panel" style="margin-bottom: 24px;">
         <div class="panel-header">
           <div class="panel-title">🤖 Bot Strategy Radar</div>
         </div>
         
-        <div style="background: var(--glass-bg); padding: 14px; border-radius: 12px; border: 1px solid var(--card-border);">
-          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 700;">Live EA Engine Status</div>
-          <div style="font-size: 14px; font-weight: 700; color: var(--accent-cyan); word-break: break-word;" id="ea-status-text">Connecting to MT5...</div>
+        <div style="background: var(--glass-bg); padding: 16px; border-radius: 12px; border: 1px solid var(--card-border);">
+          <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 700;">Live EA Engine Status</div>
+          <div style="font-size: 15px; font-weight: 700; color: var(--accent-cyan);" id="ea-status-text">v5.0 PULLBACK SCALPER READY</div>
         </div>
 
-        <div style="margin-top: 14px;">
-          <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600;">
-            <span style="color: var(--text-muted);">$25/Trade Momentum Target</span>
+        <div style="margin-top: 16px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+            <span style="color: var(--text-muted);">$25/Trade Momentum Target Progress</span>
             <span id="target-progress-text" class="mono">0%</span>
           </div>
           <div class="progress-bar-container">
@@ -751,11 +566,9 @@
       <!-- Real-time Chart -->
       <div class="panel">
         <div class="panel-header">
-          <div class="panel-title">📈 Equity Curve</div>
+          <div class="panel-title">📈 Real-Time Equity Curve</div>
         </div>
-        <div style="position: relative; height: 180px;">
-          <canvas id="equityChart"></canvas>
-        </div>
+        <canvas id="equityChart" height="180"></canvas>
       </div>
     </div>
 
@@ -767,7 +580,6 @@
     const urlParams = new URLSearchParams(window.location.search);
     const adminPin = urlParams.get('pin') || '';
     const isAdmin = (adminPin === '7788');
-    let consecutiveErrors = 0;
 
     function initChart() {
       const ctx = document.getElementById('equityChart').getContext('2d');
@@ -780,10 +592,10 @@
             data: [],
             borderColor: '#06b6d4',
             backgroundColor: 'rgba(6, 182, 212, 0.1)',
-            borderWidth: 2,
+            borderWidth: 3,
             fill: true,
             tension: 0.35,
-            pointRadius: 0
+            pointRadius: 2
           }]
         },
         options: {
@@ -791,14 +603,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { 
-              grid: { color: 'rgba(30, 41, 59, 0.5)' }, 
-              ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 8, maxRotation: 0 } 
-            },
-            y: { 
-              grid: { color: 'rgba(30, 41, 59, 0.5)' }, 
-              ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 5 } 
-            }
+            x: { grid: { color: 'rgba(30, 41, 59, 0.5)' }, ticks: { color: '#94a3b8', font: { size: 11 } } },
+            y: { grid: { color: 'rgba(30, 41, 59, 0.5)' }, ticks: { color: '#94a3b8', font: { size: 11 } } }
           }
         }
       });
@@ -810,27 +616,23 @@
         return true;
       }
 
-      try {
-        if (!myReqId) {
-          const res = await fetch('/api/request_access', { method: 'POST' });
-          const data = await res.json();
-          myReqId = data.req_id;
-          localStorage.setItem('talha_room_req_id', myReqId);
-        }
+      if (!myReqId) {
+        const res = await fetch('/api/request_access', { method: 'POST' });
+        const data = await res.json();
+        myReqId = data.req_id;
+        localStorage.setItem('talha_room_req_id', myReqId);
+      }
 
-        document.getElementById('req-id-display').innerText = '#' + myReqId;
+      document.getElementById('req-id-display').innerText = '#' + myReqId;
 
-        const chk = await fetch('/api/check_approval?req_id=' + myReqId);
-        const cdata = await chk.json();
+      const chk = await fetch('/api/check_approval?req_id=' + myReqId);
+      const cdata = await chk.json();
 
-        if (cdata.status === 'APPROVED') {
-          document.getElementById('guest-lock-modal').style.display = 'none';
-          return true;
-        } else {
-          document.getElementById('guest-lock-modal').style.display = 'flex';
-          return false;
-        }
-      } catch (err) {
+      if (cdata.status === 'APPROVED') {
+        document.getElementById('guest-lock-modal').style.display = 'none';
+        return true;
+      } else {
+        document.getElementById('guest-lock-modal').style.display = 'flex';
         return false;
       }
     }
@@ -846,15 +648,9 @@
 
         const res = await fetch(fetchUrl);
         const data = await res.json();
-        consecutiveErrors = 0;
         renderDashboard(data);
       } catch (err) {
-        consecutiveErrors++;
-        if (consecutiveErrors > 5) {
-          document.getElementById('sys-status').innerText = 'CONNECTION LOST';
-          document.getElementById('sys-status-pill').className = 'status-pill offline';
-          document.getElementById('pulse-dot').style.backgroundColor = 'var(--accent-red)';
-        }
+        console.error('Error fetching status:', err);
       }
     }
 
@@ -863,27 +659,8 @@
       const positions = data.positions || [];
       const botStatus = data.bot_status || 'ONLINE';
       const isUserAdmin = data.is_admin || isAdmin;
-      const sysStatus = data.system_status || 'ONLINE';
 
-      // System status pill
-      const statusPill = document.getElementById('sys-status-pill');
-      const pulseDot = document.getElementById('pulse-dot');
-      if (sysStatus === 'ONLINE') {
-        document.getElementById('sys-status').innerText = 'SYSTEM ONLINE';
-        statusPill.className = 'status-pill';
-        pulseDot.style.backgroundColor = 'var(--accent-green)';
-      } else {
-        document.getElementById('sys-status').innerText = sysStatus;
-        statusPill.className = 'status-pill offline';
-        pulseDot.style.backgroundColor = 'var(--accent-red)';
-      }
-
-      // Last update time
-      if (data.last_update) {
-        document.getElementById('last-update-time').innerText = data.last_update;
-      }
-
-      // Role badge & admin buttons
+      // Update Role Badge & Hide Admin Buttons for Viewers
       const roleBadge = document.getElementById('role-badge');
       const adminBtn = document.getElementById('admin-close-btn');
 
@@ -893,48 +670,34 @@
         adminBtn.style.display = 'inline-flex';
       } else {
         roleBadge.className = 'role-pill viewer';
-        roleBadge.innerHTML = '<span>👁️ Viewer (Read-Only)</span>';
-        adminBtn.style.display = 'none';
+        roleBadge.innerHTML = '<span>👁️ Viewer Mode (Read-Only)</span>';
+        adminBtn.style.display = 'none'; // Hide Emergency Close button for viewers!
       }
 
-      // Pending requests banner
+      // Handle Pending Requests Notification Banner for Admin
       const reqBanner = document.getElementById('admin-requests-banner');
       if (isUserAdmin && data.pending_requests && data.pending_requests.length > 0) {
         reqBanner.style.display = 'flex';
         const latestReq = data.pending_requests[0];
-        document.getElementById('req-banner-text').innerText = `🔔 Viewer Requesting Access (#${latestReq.req_id})`;
+        document.getElementById('req-banner-text').innerText = `🔔 Visitor Requesting Dashboard View Access (#${latestReq.req_id})`;
         document.getElementById('req-banner-sub').innerText = `IP: ${latestReq.ip} • Time: ${latestReq.time}`;
         document.getElementById('req-banner-actions').innerHTML = `
-          <button class="btn btn-allow" onclick="approveGuest('${latestReq.req_id}', 'ALLOW')">✅ ALLOW</button>
+          <button class="btn btn-allow" onclick="approveGuest('${latestReq.req_id}', 'ALLOW')">✅ ALLOW ACCESS</button>
           <button class="btn btn-deny" onclick="approveGuest('${latestReq.req_id}', 'DENY')">❌ DENY</button>
         `;
       } else {
         reqBanner.style.display = 'none';
       }
 
-      // Account values
-      const bal = acc.balance || 0;
-      const eq = acc.equity || 0;
-      const pnl = acc.floating_pnl || 0;
+      // Update Account Values
+      const bal = acc.balance || 10000.0;
+      const eq = acc.equity || 10000.0;
+      const pnl = acc.floating_pnl || 0.0;
 
-      document.getElementById('val-balance').innerText = '$' + bal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('val-equity').innerText = '$' + eq.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('val-balance').innerText = '$' + bal.toLocaleString('en-US', {minimumFractionDigits: 2});
+      document.getElementById('val-equity').innerText = '$' + eq.toLocaleString('en-US', {minimumFractionDigits: 2});
 
-      // Equity diff
-      const eqDiff = eq - bal;
-      const eqDiffEl = document.getElementById('val-equity-diff');
-      if (eqDiff > 0) {
-        eqDiffEl.innerText = `+$${eqDiff.toFixed(2)} above balance`;
-        eqDiffEl.style.color = 'var(--accent-green)';
-      } else if (eqDiff < 0) {
-        eqDiffEl.innerText = `-$${Math.abs(eqDiff).toFixed(2)} below balance`;
-        eqDiffEl.style.color = 'var(--accent-red)';
-      } else {
-        eqDiffEl.innerText = 'Net Equity Sync';
-        eqDiffEl.style.color = 'var(--text-muted)';
-      }
-
-      // PnL
+      // PnL formatting
       const pnlEl = document.getElementById('val-pnl');
       const pnlStatusEl = document.getElementById('val-pnl-status');
       if (pnl > 0) {
@@ -945,35 +708,35 @@
       } else if (pnl < 0) {
         pnlEl.innerText = '-$' + Math.abs(pnl).toFixed(2);
         pnlEl.style.color = 'var(--accent-red)';
-        pnlStatusEl.innerText = 'HOLDING ▼ (NEVER CLOSE IN LOSS)';
+        pnlStatusEl.innerText = 'HOLDING IN LOSS ▼ (NEVER CLOSE IN LOSS)';
         pnlStatusEl.style.color = 'var(--accent-gold)';
       } else {
         pnlEl.innerText = '$0.00';
         pnlEl.style.color = 'var(--text-main)';
-        pnlStatusEl.innerText = positions.length > 0 ? 'BREAK EVEN' : 'NO OPEN POSITIONS';
+        pnlStatusEl.innerText = 'NO OPEN POSITIONS';
         pnlStatusEl.style.color = 'var(--text-muted)';
       }
 
-      // Win Rate
+      // Win Rate & Session
       const won = acc.baskets_won || 0;
       const total = acc.baskets_total || 0;
       const wr = total > 0 ? ((won / total) * 100).toFixed(1) + '%' : '100.0%';
       document.getElementById('val-winrate').innerText = wr;
-      document.getElementById('val-session-profit').innerText = 'Session: +$' + (acc.session_profit || 0).toFixed(2);
+      document.getElementById('val-session-profit').innerText = 'Session Total: +$' + (acc.session_profit || 0).toFixed(2);
 
-      // Bot Status
+      // Bot Status Text
       document.getElementById('ea-status-text').innerText = botStatus;
 
-      // Target Progress
+      // Target Progress Bar
       let targetPct = 0;
-      if (positions.length > 0 && pnl > 0) {
+      if (positions.length > 0) {
         const targetUSD = positions.length * 25.0;
         targetPct = Math.min(100, Math.max(0, (pnl / targetUSD) * 100));
       }
       document.getElementById('target-progress-bar').style.width = targetPct + '%';
       document.getElementById('target-progress-text').innerText = targetPct.toFixed(0) + '%';
 
-      // Positions Table
+      // Positions Table Rendering
       document.getElementById('pos-count-label').innerText = positions.length + ' Active Position(s)';
       const tbody = document.getElementById('trades-tbody');
       const emptyBox = document.getElementById('empty-positions');
@@ -988,8 +751,8 @@
           const isProf = p.pnl >= 0;
           const sideBadge = p.type === 'BUY' ? '<span class="badge-buy">BUY</span>' : '<span class="badge-sell">SELL</span>';
           const statusBadge = isProf 
-            ? '<span class="status-prof">▲ +$' + p.pnl.toFixed(2) + '</span>'
-            : '<span class="status-hold">⏳ -$' + Math.abs(p.pnl).toFixed(2) + '</span>';
+            ? '<span class="status-prof">▲ PROFITABLE (+$' + p.pnl.toFixed(2) + ')</span>'
+            : '<span class="status-hold">⏳ HOLDING IN LOSS (-$' + Math.abs(p.pnl).toFixed(2) + ')</span>';
           
           const pnlColor = isProf ? 'color: var(--accent-green);' : 'color: var(--accent-red);';
           const pnlSign = isProf ? '+' : '';
@@ -1021,14 +784,15 @@
 
     async function approveGuest(reqId, action) {
       try {
-        await fetch('/api/approve_request', {
+        const res = await fetch('/api/approve_request', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pin: '7788', req_id: reqId, action: action })
         });
+        const data = await res.json();
         fetchStatus();
       } catch (err) {
-        alert('Error processing request');
+        alert('Error approving request');
       }
     }
 
@@ -1041,7 +805,7 @@
             body: JSON.stringify({ pin: '7788' })
           });
           const data = await res.json();
-          alert(data.message || 'Emergency close command sent!');
+          alert('Closed ' + data.closed_count + ' active position(s).');
           fetchStatus();
         } catch (err) {
           alert('Error executing emergency close.');
@@ -1049,11 +813,11 @@
       }
     }
 
-    // Auto-refresh polling
+    // Auto-refresh polling every 1 second
     window.onload = function() {
       initChart();
       fetchStatus();
-      setInterval(fetchStatus, 2000);
+      setInterval(fetchStatus, 1000);
     };
   </script>
 </body>
