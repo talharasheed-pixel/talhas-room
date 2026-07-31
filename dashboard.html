@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,7 +9,9 @@
   <meta name="theme-color" content="#070a12">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
@@ -25,12 +28,20 @@
       --glass-bg: rgba(30, 41, 59, 0.4);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    .mono { font-family: 'JetBrains Mono', monospace; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
 
     body {
       background-color: var(--bg-dark);
-      background-image: 
+      background-image:
         radial-gradient(at 10% 10%, rgba(245, 158, 11, 0.08) 0px, transparent 50%),
         radial-gradient(at 90% 90%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
         radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
@@ -150,9 +161,20 @@
     }
 
     @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+
+      70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+      }
+
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
     }
 
     /* ============================================ */
@@ -207,13 +229,24 @@
     .metric-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; width: 4px; height: 100%;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
       background: var(--accent-gold);
     }
 
-    .metric-card.green::before { background: var(--accent-green); }
-    .metric-card.cyan::before { background: var(--accent-cyan); }
-    .metric-card.purple::before { background: var(--accent-purple); }
+    .metric-card.green::before {
+      background: var(--accent-green);
+    }
+
+    .metric-card.cyan::before {
+      background: var(--accent-cyan);
+    }
+
+    .metric-card.purple::before {
+      background: var(--accent-purple);
+    }
 
     .metric-header {
       display: flex;
@@ -359,15 +392,26 @@
       white-space: nowrap;
     }
 
-    .btn-allow { background: #10b981; color: white; }
-    .btn-deny { background: #f43f5e; color: white; }
+    .btn-allow {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-deny {
+      background: #f43f5e;
+      color: white;
+    }
 
     .btn-danger {
       background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(225, 29, 72, 0.4));
       color: #fecdd3;
       border: 1px solid rgba(244, 63, 94, 0.5);
     }
-    .btn-danger:hover { background: #f43f5e; color: white; }
+
+    .btn-danger:hover {
+      background: #f43f5e;
+      color: white;
+    }
 
     .btn-secondary {
       background: var(--glass-bg);
@@ -386,7 +430,10 @@
     /* ============================================ */
     .lock-overlay {
       position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       background: rgba(7, 10, 18, 0.95);
       backdrop-filter: blur(20px);
       z-index: 9999;
@@ -407,7 +454,10 @@
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
     }
 
-    .lock-icon { font-size: 48px; margin-bottom: 14px; }
+    .lock-icon {
+      font-size: 48px;
+      margin-bottom: 14px;
+    }
 
     .spinner {
       width: 32px;
@@ -419,7 +469,15 @@
       margin: 16px auto 0;
     }
 
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
     /* Progress Bar */
     .progress-bar-container {
@@ -465,6 +523,7 @@
       .metrics-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .content-grid {
         grid-template-columns: 1fr;
       }
@@ -540,7 +599,8 @@
         min-width: 580px;
       }
 
-      th, td {
+      th,
+      td {
         padding: 10px 6px;
         font-size: 11px;
       }
@@ -584,13 +644,15 @@
         gap: 5px;
       }
 
-      .role-pill, .status-pill {
+      .role-pill,
+      .status-pill {
         font-size: 10px;
         padding: 4px 8px;
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Visitor Waiting Approval Modal -->
@@ -602,7 +664,8 @@
         Access Request Submitted to Admin (Talha).<br>
         Please wait for Talha to approve your view request...
       </p>
-      <div style="margin-top: 14px; font-size: 12px; color: var(--accent-cyan);" class="mono" id="req-id-display">#REQ-WAITING</div>
+      <div style="margin-top: 14px; font-size: 12px; color: var(--accent-cyan);" class="mono" id="req-id-display">
+        #REQ-WAITING</div>
       <div class="spinner"></div>
     </div>
   </div>
@@ -640,8 +703,10 @@
     <div class="req-item">
       <span style="font-size: 18px;">🔔</span>
       <div>
-        <div style="font-weight: 700; color: #fbbf24; font-size: 13px;" id="req-banner-text">Visitor Requesting Dashboard View Access</div>
-        <div style="font-size: 11px; color: var(--text-muted);" id="req-banner-sub">Allow chrome tab to view read-only dashboard?</div>
+        <div style="font-weight: 700; color: #fbbf24; font-size: 13px;" id="req-banner-text">Visitor Requesting
+          Dashboard View Access</div>
+        <div style="font-size: 11px; color: var(--text-muted);" id="req-banner-sub">Allow chrome tab to view read-only
+          dashboard?</div>
       </div>
     </div>
     <div style="display: flex; gap: 8px;" id="req-banner-actions">
@@ -690,7 +755,7 @@
 
   <!-- Main Content Grid -->
   <div class="content-grid">
-    
+
     <!-- Active Positions Section -->
     <div class="panel">
       <div class="panel-header">
@@ -720,7 +785,8 @@
         <div class="empty-state" id="empty-positions">
           <div style="font-size: 32px; margin-bottom: 8px;">🛡️</div>
           <div>No Active Open Trades Right Now</div>
-          <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">AuraScalper AI is scanning M1 candles for pullback entries.</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">AuraScalper AI is scanning M1 candles
+            for pullback entries.</div>
         </div>
       </div>
 
@@ -761,10 +827,14 @@
         <div class="panel-header">
           <div class="panel-title">🤖 Bot Strategy Radar</div>
         </div>
-        
-        <div style="background: var(--glass-bg); padding: 14px; border-radius: 12px; border: 1px solid var(--card-border);">
-          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 700;">Live EA Engine Status</div>
-          <div style="font-size: 14px; font-weight: 700; color: var(--accent-cyan); word-break: break-word;" id="ea-status-text">Connecting to MT5...</div>
+
+        <div
+          style="background: var(--glass-bg); padding: 14px; border-radius: 12px; border: 1px solid var(--card-border);">
+          <div
+            style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 700;">
+            Live EA Engine Status</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--accent-cyan); word-break: break-word;"
+            id="ea-status-text">Connecting to MT5...</div>
         </div>
 
         <div style="margin-top: 14px;">
@@ -821,13 +891,13 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { 
-              grid: { color: 'rgba(30, 41, 59, 0.5)' }, 
-              ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 8, maxRotation: 0 } 
+            x: {
+              grid: { color: 'rgba(30, 41, 59, 0.5)' },
+              ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 8, maxRotation: 0 }
             },
-            y: { 
-              grid: { color: 'rgba(30, 41, 59, 0.5)' }, 
-              ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 5 } 
+            y: {
+              grid: { color: 'rgba(30, 41, 59, 0.5)' },
+              ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 5 }
             }
           }
         }
@@ -947,8 +1017,8 @@
       const eq = acc.equity || 0;
       const pnl = acc.floating_pnl || 0;
 
-      document.getElementById('val-balance').innerText = '$' + bal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('val-equity').innerText = '$' + eq.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('val-balance').innerText = '$' + bal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('val-equity').innerText = '$' + eq.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
       // Equity diff
       const eqDiff = eq - bal;
@@ -1024,10 +1094,10 @@
           const isProf = pnlVal >= 0;
 
           const sideBadge = sideVal === 'BUY' ? '<span class="badge-buy">BUY</span>' : '<span class="badge-sell">SELL</span>';
-          const statusBadge = isProf 
+          const statusBadge = isProf
             ? '<span class="status-prof">▲ +$' + pnlVal.toFixed(2) + '</span>'
             : '<span class="status-hold">⏳ -$' + Math.abs(pnlVal).toFixed(2) + '</span>';
-          
+
           const pnlColor = isProf ? 'color: var(--accent-green);' : 'color: var(--accent-red);';
           const pnlSign = isProf ? '+' : '';
 
@@ -1064,8 +1134,8 @@
           const hPnl = (h.pnl !== undefined && h.pnl !== null) ? Number(h.pnl) : (h.profit || 0);
           const sideVal = h.side || h.type || 'BUY';
           const sideBadge = sideVal === 'BUY' ? '<span class="badge-buy">BUY</span>' : '<span class="badge-sell">SELL</span>';
-          const resultBadge = isWin 
-            ? '<span class="status-prof">WIN</span>' 
+          const resultBadge = isWin
+            ? '<span class="status-prof">WIN</span>'
             : '<span class="badge-sell">LOSS</span>';
           const pnlColor = isWin ? 'color: var(--accent-green);' : 'color: var(--accent-red);';
           const pnlSign = isWin ? '+' : '';
@@ -1125,11 +1195,12 @@
     }
 
     // Auto-refresh polling
-    window.onload = function() {
+    window.onload = function () {
       initChart();
       fetchStatus();
       setInterval(fetchStatus, 2000);
     };
   </script>
 </body>
+
 </html>
