@@ -1,0 +1,2 @@
+# Cloud Dashboard Relay Server dependencies
+# (Uses Python Standard Library HTTPServer - No external dependencies required!)
