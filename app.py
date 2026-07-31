@@ -164,14 +164,25 @@ class CloudDashboardHandler(BaseHTTPRequestHandler):
         token = query.get("token", [""])[0]
         req_id = query.get("req_id", [""])[0]
 
-        # ---- Serve Dashboard HTML ----
+                # ---- Serve Dashboard HTML ----
         if path in ("/", "/view", "/index.html"):
-            html_path = Path(__file__).parent / "templates" / "dashboard.html"
-            if html_path.exists():
-                self._send_html(html_path.read_bytes())
+            possible_paths = [
+                Path(__file__).parent / "templates" / "dashboard.html",
+                Path(__file__).parent / "dashboard.html",
+                Path.cwd() / "templates" / "dashboard.html",
+                Path.cwd() / "dashboard.html"
+            ]
+            found_path = None
+            for p in possible_paths:
+                if p.exists():
+                    found_path = p
+                    break
+            if found_path:
+                self._send_html(found_path.read_bytes())
             else:
-                self.send_error(404, "dashboard.html not found in templates/")
+                self.send_error(404, "dashboard.html not found in repository")
             return
+
 
         # ---- Check Guest Approval Status ----
         if path == "/api/check_approval":
