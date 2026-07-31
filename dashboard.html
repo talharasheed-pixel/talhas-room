@@ -670,6 +670,65 @@
     </div>
   </div>
 
+  <!-- Admin Password Login & Forgot Password Modal -->
+  <div class="lock-overlay" id="admin-login-modal" style="display: none;">
+    <div class="lock-card" style="max-width: 400px; text-align: left;">
+      <div style="text-align: center; margin-bottom: 16px;">
+        <div class="lock-icon">👑</div>
+        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 4px;">Talha's Room Admin</h2>
+        <p style="color: var(--text-muted); font-size: 13px;">Enter Admin Password to access Control Center</p>
+      </div>
+
+      <!-- 1. Password Login View -->
+      <div id="admin-view-login">
+        <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">Admin Password</label>
+        <input type="password" id="admin-pwd-input" placeholder="Enter password (Default: Talha@0208)" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-dark); color: #fff; font-size: 14px; margin-bottom: 12px; outline: none;" onkeydown="if(event.key==='Enter') submitAdminLogin()">
+        
+        <div id="admin-login-error" style="color: var(--accent-red); font-size: 12px; margin-bottom: 10px; display: none;"></div>
+
+        <button onclick="submitAdminLogin()" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 800; font-size: 14px; cursor: pointer; margin-bottom: 14px;">🔑 ENTER DASHBOARD</button>
+        
+        <div style="text-align: center;">
+          <a href="javascript:void(0)" onclick="showForgotPasswordView()" style="color: var(--accent-cyan); font-size: 12px; text-decoration: none; font-weight: 600;">Forgot Password?</a>
+        </div>
+      </div>
+
+      <!-- 2. Forgot Password Recovery Question View -->
+      <div id="admin-view-forgot" style="display: none;">
+        <div style="padding: 12px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; margin-bottom: 14px;">
+          <div style="font-size: 11px; color: var(--accent-gold); font-weight: 800; letter-spacing: 0.5px;">SECURITY RECOVERY QUESTION</div>
+          <div style="font-size: 15px; font-weight: 800; margin-top: 4px; color: #fff;">Talha's Favourite Name?</div>
+        </div>
+
+        <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">Security Answer</label>
+        <input type="password" id="admin-answer-input" placeholder="Type answer here..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-dark); color: #fff; font-size: 14px; margin-bottom: 12px; outline: none;" onkeydown="if(event.key==='Enter') verifySecurityAnswer()">
+
+        <div id="admin-forgot-error" style="color: var(--accent-red); font-size: 12px; margin-bottom: 10px; display: none;"></div>
+
+        <button onclick="verifySecurityAnswer()" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: linear-gradient(135deg, #06b6d4, #0891b2); color: #fff; font-weight: 800; font-size: 14px; cursor: pointer; margin-bottom: 12px;">VERIFY ANSWER</button>
+
+        <div style="text-align: center;">
+          <a href="javascript:void(0)" onclick="showLoginView()" style="color: var(--text-muted); font-size: 12px; text-decoration: none;">← Back to Password Login</a>
+        </div>
+      </div>
+
+      <!-- 3. Set New Password View -->
+      <div id="admin-view-reset" style="display: none;">
+        <div style="padding: 10px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 8px; margin-bottom: 14px; color: var(--accent-green); font-size: 13px; font-weight: 700;">
+          ✅ Answer Verified! Enter your new Admin password:
+        </div>
+
+        <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">New Password</label>
+        <input type="password" id="admin-new-pwd-input" placeholder="Enter new password" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-dark); color: #fff; font-size: 14px; margin-bottom: 12px; outline: none;" onkeydown="if(event.key==='Enter') submitNewPassword()">
+
+        <div id="admin-reset-error" style="color: var(--accent-red); font-size: 12px; margin-bottom: 10px; display: none;"></div>
+
+        <button onclick="submitNewPassword()" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 800; font-size: 14px; cursor: pointer;">SET NEW PASSWORD & ACCESS</button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Top Header -->
   <div class="header">
     <div class="brand-box">
@@ -863,11 +922,138 @@
 
   <script>
     let chartInstance = null;
-    let myReqId = localStorage.getItem('talha_room_req_id') || '';
     const urlParams = new URLSearchParams(window.location.search);
-    const adminPin = urlParams.get('pin') || '';
-    const isAdmin = (adminPin === '7788');
-    let consecutiveErrors = 0;
+    const pinParam = urlParams.get('pin') || '';
+    const adminParam = urlParams.get('admin') || '';
+    const pwdParam = urlParams.get('password') || '';
+
+    // Viewer session storage (clears when tab/browser is closed so every visit requires fresh approval!)
+    let myReqId = sessionStorage.getItem('talha_room_req_id') || '';
+
+    // Admin Auth State
+    let adminToken = sessionStorage.getItem('talha_room_admin_token') || '';
+    let adminPassword = sessionStorage.getItem('talha_room_admin_pwd') || pwdParam;
+    let isAdmin = (pinParam === '7788') || (adminParam === '1') || !!adminToken || !!adminPassword || (window.location.pathname.indexOf('admin') !== -1);
+    let verifiedAdmin = false;
+    let verifiedAnswer = '';
+
+    function showLoginView() {
+      document.getElementById('admin-view-login').style.display = 'block';
+      document.getElementById('admin-view-forgot').style.display = 'none';
+      document.getElementById('admin-view-reset').style.display = 'none';
+      document.getElementById('admin-login-error').style.display = 'none';
+    }
+
+    function showForgotPasswordView() {
+      document.getElementById('admin-view-login').style.display = 'none';
+      document.getElementById('admin-view-forgot').style.display = 'block';
+      document.getElementById('admin-view-reset').style.display = 'none';
+      document.getElementById('admin-forgot-error').style.display = 'none';
+    }
+
+    function showResetPasswordView() {
+      document.getElementById('admin-view-login').style.display = 'none';
+      document.getElementById('admin-view-forgot').style.display = 'none';
+      document.getElementById('admin-view-reset').style.display = 'block';
+      document.getElementById('admin-reset-error').style.display = 'none';
+    }
+
+    async function submitAdminLogin() {
+      const pwd = document.getElementById('admin-pwd-input').value.trim();
+      const errEl = document.getElementById('admin-login-error');
+      if (!pwd) {
+        errEl.innerText = 'Please enter Admin password';
+        errEl.style.display = 'block';
+        return;
+      }
+      try {
+        const res = await fetch('/api/admin_login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pwd })
+        });
+        const data = await res.json();
+        if (data.status === 'SUCCESS') {
+          adminToken = data.admin_token;
+          adminPassword = pwd;
+          sessionStorage.setItem('talha_room_admin_token', adminToken);
+          sessionStorage.setItem('talha_room_admin_pwd', pwd);
+          isAdmin = true;
+          verifiedAdmin = true;
+          document.getElementById('admin-login-modal').style.display = 'none';
+          fetchStatus();
+        } else {
+          errEl.innerText = data.message || 'Incorrect password!';
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        errEl.innerText = 'Login error. Please try again.';
+        errEl.style.display = 'block';
+      }
+    }
+
+    async function verifySecurityAnswer() {
+      const ans = document.getElementById('admin-answer-input').value.trim();
+      const errEl = document.getElementById('admin-forgot-error');
+      if (!ans) {
+        errEl.innerText = 'Please enter security answer';
+        errEl.style.display = 'block';
+        return;
+      }
+      try {
+        const res = await fetch('/api/verify_security_question', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ answer: ans })
+        });
+        const data = await res.json();
+        if (data.status === 'SUCCESS') {
+          verifiedAnswer = ans;
+          showResetPasswordView();
+        } else {
+          errEl.innerText = data.message || 'Incorrect answer to security question!';
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        errEl.innerText = 'Verification error. Try again.';
+        errEl.style.display = 'block';
+      }
+    }
+
+    async function submitNewPassword() {
+      const newPwd = document.getElementById('admin-new-pwd-input').value.trim();
+      const errEl = document.getElementById('admin-reset-error');
+      if (!newPwd) {
+        errEl.innerText = 'Please enter new password';
+        errEl.style.display = 'block';
+        return;
+      }
+      try {
+        const res = await fetch('/api/reset_password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ answer: verifiedAnswer, new_password: newPwd })
+        });
+        const data = await res.json();
+        if (data.status === 'SUCCESS') {
+          adminToken = data.admin_token;
+          adminPassword = newPwd;
+          sessionStorage.setItem('talha_room_admin_token', adminToken);
+          sessionStorage.setItem('talha_room_admin_pwd', newPwd);
+          isAdmin = true;
+          verifiedAdmin = true;
+          document.getElementById('admin-login-modal').style.display = 'none';
+          alert('✅ New Password set successfully! Access granted.');
+          fetchStatus();
+        } else {
+          errEl.innerText = data.message || 'Error updating password';
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        errEl.innerText = 'Reset error. Try again.';
+        errEl.style.display = 'block';
+      }
+    }
 
     function initChart() {
       const ctx = document.getElementById('equityChart').getContext('2d');
@@ -905,17 +1091,26 @@
     }
 
     async function checkOrRequestAccess() {
-      if (isAdmin) {
+      // If admin link or admin parameter is accessed:
+      if (isAdmin && !verifiedAdmin && !adminToken && !adminPassword) {
+        document.getElementById('admin-login-modal').style.display = 'flex';
+        document.getElementById('guest-lock-modal').style.display = 'none';
+        return false;
+      }
+
+      if (isAdmin && (verifiedAdmin || adminToken || adminPassword)) {
+        document.getElementById('admin-login-modal').style.display = 'none';
         document.getElementById('guest-lock-modal').style.display = 'none';
         return true;
       }
 
+      // Guest / Viewer logic (uses sessionStorage -> forces fresh permission when tab/site closed!)
       try {
         if (!myReqId) {
           const res = await fetch('/api/request_access', { method: 'POST' });
           const data = await res.json();
           myReqId = data.req_id;
-          localStorage.setItem('talha_room_req_id', myReqId);
+          sessionStorage.setItem('talha_room_req_id', myReqId);
         }
 
         document.getElementById('req-id-display').innerText = '#' + myReqId;
@@ -941,19 +1136,29 @@
 
       try {
         let fetchUrl = '/api/status';
-        if (isAdmin) fetchUrl += '?pin=7788';
-        else if (myReqId) fetchUrl += '?token=' + myReqId;
+        if (isAdmin) {
+          if (adminPassword) fetchUrl += '?password=' + encodeURIComponent(adminPassword);
+          else if (adminToken) fetchUrl += '?admin_token=' + encodeURIComponent(adminToken);
+          else if (pinParam) fetchUrl += '?pin=' + encodeURIComponent(pinParam);
+        } else if (myReqId) {
+          fetchUrl += '?token=' + encodeURIComponent(myReqId);
+        }
 
         const res = await fetch(fetchUrl);
         const data = await res.json();
+
+        if (data.is_admin === false && isAdmin && !adminPassword && !adminToken) {
+          document.getElementById('admin-login-modal').style.display = 'flex';
+          return;
+        }
+
         consecutiveErrors = 0;
         renderDashboard(data);
       } catch (err) {
         consecutiveErrors++;
-        if (consecutiveErrors > 5) {
-          document.getElementById('sys-status').innerText = 'CONNECTION LOST';
+        if (consecutiveErrors > 3) {
+          document.getElementById('sys-status').innerText = 'RECONNECTING...';
           document.getElementById('sys-status-pill').className = 'status-pill offline';
-          document.getElementById('pulse-dot').style.backgroundColor = 'var(--accent-red)';
         }
       }
     }
@@ -961,21 +1166,19 @@
     function renderDashboard(data) {
       const acc = data.account || {};
       const positions = data.positions || [];
-      const botStatus = data.bot_status || 'ONLINE';
+      const botStatus = data.bot_status || 'Engine Active';
       const isUserAdmin = data.is_admin || isAdmin;
-      const sysStatus = data.system_status || 'ONLINE';
 
-      // System status pill
-      const statusPill = document.getElementById('sys-status-pill');
-      const pulseDot = document.getElementById('pulse-dot');
-      if (sysStatus === 'ONLINE') {
-        document.getElementById('sys-status').innerText = 'SYSTEM ONLINE';
-        statusPill.className = 'status-pill';
-        pulseDot.style.backgroundColor = 'var(--accent-green)';
+      // Status pill
+      const sysStatusEl = document.getElementById('sys-status');
+      const sysStatusPill = document.getElementById('sys-status-pill');
+
+      if (data.system_status && data.system_status.includes('WAITING')) {
+        sysStatusEl.innerText = 'MT5 DISCONNECTED';
+        sysStatusPill.className = 'status-pill offline';
       } else {
-        document.getElementById('sys-status').innerText = sysStatus;
-        statusPill.className = 'status-pill offline';
-        pulseDot.style.backgroundColor = 'var(--accent-red)';
+        sysStatusEl.innerText = 'SYSTEM ONLINE';
+        sysStatusPill.className = 'status-pill';
       }
 
       // Last update time
@@ -1002,7 +1205,7 @@
       if (isUserAdmin && data.pending_requests && data.pending_requests.length > 0) {
         reqBanner.style.display = 'flex';
         const latestReq = data.pending_requests[0];
-        document.getElementById('req-banner-text').innerText = `🔔 Viewer Requesting Access (#${latestReq.req_id})`;
+        document.getElementById('req-banner-text').innerText = `🔔 Visitor Requesting Access (#${latestReq.req_id})`;
         document.getElementById('req-banner-sub').innerText = `IP: ${latestReq.ip} • Time: ${latestReq.time}`;
         document.getElementById('req-banner-actions').innerHTML = `
           <button class="btn btn-allow" onclick="approveGuest('${latestReq.req_id}', 'ALLOW')">✅ ALLOW</button>
@@ -1015,7 +1218,13 @@
       // Account values
       const bal = acc.balance || 0;
       const eq = acc.equity || 0;
-      const pnl = acc.floating_pnl || 0;
+      let pnl = acc.floating_pnl !== undefined ? acc.floating_pnl : 0;
+      if (pnl === 0 && positions.length > 0) {
+        pnl = positions.reduce((sum, p) => sum + Number(p.pnl !== undefined ? p.pnl : (p.profit || 0)), 0);
+      }
+      if (pnl === 0 && (eq - bal) !== 0) {
+        pnl = eq - bal;
+      }
 
       document.getElementById('val-balance').innerText = '$' + bal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       document.getElementById('val-equity').innerText = '$' + eq.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -1034,13 +1243,14 @@
         eqDiffEl.style.color = 'var(--text-muted)';
       }
 
-      // PnL
+      // Floating PnL Card
       const pnlEl = document.getElementById('val-pnl');
       const pnlStatusEl = document.getElementById('val-pnl-status');
+
       if (pnl > 0) {
         pnlEl.innerText = '+$' + pnl.toFixed(2);
         pnlEl.style.color = 'var(--accent-green)';
-        pnlStatusEl.innerText = 'PROFITABLE BASKET ▲';
+        pnlStatusEl.innerText = 'IN PROFIT ▲';
         pnlStatusEl.style.color = 'var(--accent-green)';
       } else if (pnl < 0) {
         pnlEl.innerText = '-$' + Math.abs(pnl).toFixed(2);
@@ -1170,7 +1380,7 @@
         await fetch('/api/approve_request', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ pin: '7788', req_id: reqId, action: action })
+          body: JSON.stringify({ pin: '7788', password: adminPassword, admin_token: adminToken, req_id: reqId, action: action })
         });
         fetchStatus();
       } catch (err) {
@@ -1184,7 +1394,7 @@
           const res = await fetch('/api/close_all', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ pin: '7788' })
+            body: JSON.stringify({ pin: '7788', password: adminPassword, admin_token: adminToken })
           });
           const data = await res.json();
           alert(data.message || 'Emergency close command sent!');

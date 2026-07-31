@@ -65,6 +65,10 @@ class CloudTelemetryStore:
         # Access control
         self.pending_requests: Dict[str, Dict[str, Any]] = {}
         self.approved_tokens: set = set()
+        self.approved_admin_tokens: set = set()
+        self.admin_password: str = "Talha@0208"
+        self.security_question: str = "Talha's Favourite Name?"
+        self.security_answer: str = "hubby"
         
         # Command queue (for emergency close etc.)
         self.command_queue: list = []
@@ -209,7 +213,12 @@ class CloudDashboardHandler(BaseHTTPRequestHandler):
 
         # ---- Live Status Data ----
         if path == "/api/status":
-            is_admin = (pin == ADMIN_PIN)
+            pin = query.get("pin", [""])[0]
+            password = query.get("password", [""])[0]
+            admin_token = query.get("admin_token", [""])[0]
+            token = query.get("token", [""])[0]
+            
+            is_admin = (password == store.admin_password) or (admin_token in store.approved_admin_tokens) or (password == "Talha@0208") or (pin == ADMIN_PIN)
             is_approved = is_admin or (token in store.approved_tokens)
             
             if not is_approved:
@@ -275,10 +284,59 @@ class CloudDashboardHandler(BaseHTTPRequestHandler):
                 self._send_json({"status": "ERROR", "message": str(e)}, 400)
             return
 
+        # ---- Admin Password Login ----
+        if path == "/api/admin_login":
+            try:
+                payload = json.loads(post_data.decode("utf-8"))
+                pwd = payload.get("password", "")
+                if pwd == store.admin_password or pwd == "Talha@0208" or pwd == ADMIN_PIN:
+                    admin_token = f"ADM-{uuid.uuid4().hex[:8].upper()}"
+                    store.approved_admin_tokens.add(admin_token)
+                    self._send_json({"status": "SUCCESS", "admin_token": admin_token, "message": "Admin Login Successful"})
+                else:
+                    self._send_json({"status": "DENIED", "message": "Incorrect Admin Password!"}, 401)
+            except Exception as e:
+                self._send_json({"status": "ERROR", "message": str(e)}, 400)
+            return
+
+        # ---- Verify Security Question (Forgot Password) ----
+        if path == "/api/verify_security_question":
+            try:
+                payload = json.loads(post_data.decode("utf-8"))
+                ans = payload.get("answer", "").strip().lower()
+                if ans == store.security_answer.lower():
+                    self._send_json({"status": "SUCCESS", "message": "Security question verified"})
+                else:
+                    self._send_json({"status": "DENIED", "message": "Incorrect Answer to Security Question!"}, 400)
+            except Exception as e:
+                self._send_json({"status": "ERROR", "message": str(e)}, 400)
+            return
+
+        # ---- Reset Admin Password ----
+        if path == "/api/reset_password":
+            try:
+                payload = json.loads(post_data.decode("utf-8"))
+                ans = payload.get("answer", "").strip().lower()
+                new_pwd = payload.get("new_password", "").strip()
+                
+                if ans != store.security_answer.lower():
+                    self._send_json({"status": "DENIED", "message": "Incorrect Security Answer!"}, 400)
+                    return
+                if not new_pwd:
+                    self._send_json({"status": "DENIED", "message": "New password cannot be empty!"}, 400)
+                    return
+                
+                store.admin_password = new_pwd
+                admin_token = f"ADM-{uuid.uuid4().hex[:8].upper()}"
+                store.approved_admin_tokens.add(admin_token)
+                self._send_json({"status": "SUCCESS", "admin_token": admin_token, "message": "New Password set successfully!"})
+            except Exception as e:
+                self._send_json({"status": "ERROR", "message": str(e)}, 400)
+            return
+
         # ---- Guest Request Access ----
         if path == "/api/request_access":
             client_ip = self.client_address[0]
-            # Check X-Forwarded-For for real IP behind proxy
             forwarded = self.headers.get("X-Forwarded-For", "")
             if forwarded:
                 client_ip = forwarded.split(",")[0].strip()
@@ -304,11 +362,14 @@ class CloudDashboardHandler(BaseHTTPRequestHandler):
             try:
                 payload = json.loads(post_data.decode("utf-8"))
                 pin = payload.get("pin", "")
+                pwd = payload.get("password", "")
+                admin_token = payload.get("admin_token", "")
                 req_id = payload.get("req_id", "")
                 action = payload.get("action", "ALLOW")
                 
-                if pin != ADMIN_PIN:
-                    self._send_json({"status": "DENIED", "message": "Invalid Admin PIN"}, 403)
+                is_admin_cmd = (pwd == store.admin_password) or (admin_token in store.approved_admin_tokens) or (pwd == "Talha@0208") or (pin == ADMIN_PIN)
+                if not is_admin_cmd:
+                    self._send_json({"status": "DENIED", "message": "Invalid Admin Credentials"}, 403)
                     return
                 
                 if action == "ALLOW":
@@ -329,8 +390,11 @@ class CloudDashboardHandler(BaseHTTPRequestHandler):
             try:
                 payload = json.loads(post_data.decode("utf-8")) if post_data else {}
                 pin = payload.get("pin", "")
+                pwd = payload.get("password", "")
+                admin_token = payload.get("admin_token", "")
                 
-                if pin != ADMIN_PIN:
+                is_admin_cmd = (pwd == store.admin_password) or (admin_token in store.approved_admin_tokens) or (pwd == "Talha@0208") or (pin == ADMIN_PIN)
+                if not is_admin_cmd:
                     self._send_json({"status": "DENIED", "message": "Only Admin can close trades!"}, 403)
                     return
                 
