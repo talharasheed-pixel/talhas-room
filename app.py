@@ -191,8 +191,19 @@ class CloudDashboardHandler(BaseHTTPRequestHandler):
             status_str = "PENDING"
             if req_id in store.approved_tokens:
                 status_str = "APPROVED"
-            elif req_id in store.pending_requests:
-                status_str = store.pending_requests[req_id].get("status", "PENDING")
+            else:
+                if req_id and req_id not in store.pending_requests:
+                    client_ip = self.client_address[0]
+                    forwarded = self.headers.get("X-Forwarded-For", "")
+                    if forwarded:
+                        client_ip = forwarded.split(",")[0].strip()
+                    now_str = datetime.datetime.now().strftime("%H:%M:%S")
+                    store.pending_requests[req_id] = {
+                        "ip": client_ip,
+                        "time": now_str,
+                        "status": "PENDING"
+                    }
+                status_str = store.pending_requests.get(req_id, {}).get("status", "PENDING")
             self._send_json({"status": status_str, "token": req_id})
             return
 
