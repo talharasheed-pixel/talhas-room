@@ -1062,8 +1062,8 @@
         let hHtml = '';
         history.forEach(h => {
           const hPnl = (h.pnl !== undefined && h.pnl !== null) ? Number(h.pnl) : (h.profit || 0);
-          const isWin = hPnl >= 0;
-          const sideBadge = h.type === 'BUY' ? '<span class="badge-buy">BUY</span>' : '<span class="badge-sell">SELL</span>';
+          const sideVal = h.side || h.type || 'BUY';
+          const sideBadge = sideVal === 'BUY' ? '<span class="badge-buy">BUY</span>' : '<span class="badge-sell">SELL</span>';
           const resultBadge = isWin 
             ? '<span class="status-prof">WIN</span>' 
             : '<span class="badge-sell">LOSS</span>';
